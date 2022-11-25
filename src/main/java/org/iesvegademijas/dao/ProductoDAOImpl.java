@@ -60,7 +60,7 @@ public class ProductoDAOImpl extends AbstractDAOImpl implements ProductoDAO{
 	 * Devuelve lista con todos los productos.
 	 */
 	@Override
-	public List<Producto> getAll() {
+	public List<Producto> getAll(){
 		
 		Connection conn = null;
 		Statement s = null;
@@ -205,4 +205,78 @@ public class ProductoDAOImpl extends AbstractDAOImpl implements ProductoDAO{
             closeDb(conn, ps, rs);
         }	
 	}
+	
+	public List<Producto> filtrarProductos(String filtroNombre) {
+		
+		List<Producto> listOrd = new ArrayList<>(); 
+		
+		Connection conn = null;
+		PreparedStatement ps = null;
+        ResultSet rs = null;
+        
+        try {
+        	conn = connectDB();
+        	
+        	ps = conn.prepareStatement("SELECT * FROM producto WHERE nombre like ? ;");
+        	String filtro = "%"+filtroNombre+"%";
+        	ps.setString(1, filtro);
+        	rs = ps.executeQuery();
+        	
+        	while (rs.next()) {
+        		Producto prod = new Producto();
+        		
+        		prod.setCodigo(rs.getInt("codigo"));
+        		prod.setNombre(rs.getString("nombre"));
+        		prod.setPrecio(rs.getDouble("precio"));
+        		prod.setCodigoFabricante(rs.getInt("codigo_fabricante"));
+        		listOrd.add(prod);
+        	}
+
+        } catch (SQLException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e){
+			e.printStackTrace();
+		} finally {
+            closeDb(conn, ps, rs);
+        }
+		
+	return listOrd;
+   					
+	}
+
+	public List<Producto> filtrarFullText(String filtroNombre) {
+	List<Producto> listOrd = new ArrayList<>(); 
+			
+			Connection conn = null;
+			PreparedStatement ps = null;
+	        ResultSet rs = null;
+	        
+	        try {
+	        	conn = connectDB();
+	        	
+	        	ps = conn.prepareStatement("Select * from producto where MATCH (nombre) against (?)");
+	        	ps.setString(1, filtroNombre);
+	        	rs = ps.executeQuery();
+	        	
+	        	while (rs.next()) {
+	        		Producto prod = new Producto();
+	        		
+	        		prod.setCodigo(rs.getInt("codigo"));
+	        		prod.setNombre(rs.getString("nombre"));
+	        		prod.setPrecio(rs.getDouble("precio"));
+	        		prod.setCodigoFabricante(rs.getInt("codigo_fabricante"));
+	        		listOrd.add(prod);
+	        	}
+	
+	        } catch (SQLException e) {
+				e.printStackTrace();
+			} catch (ClassNotFoundException e){
+				e.printStackTrace();
+			} finally {
+	            closeDb(conn, ps, rs);
+	        }
+			
+		return listOrd;
+	   					
+		}
 }

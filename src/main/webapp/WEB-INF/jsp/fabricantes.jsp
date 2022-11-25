@@ -3,24 +3,13 @@
 <%@page import="org.iesvegademijas.dto.FabricanteDTO"%>
 <%@page import="java.util.List"%>
 
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Fabricantes</title>
-<style>
-.clearfix::after {
-	content: "";
-	display: block;
-	clear: both;
-}
+<%@include file="/WEB-INF/jsp/Head.jspf" %>
 
-</style>
-</head>
 <body>
-<body>
-
+		<%@include file="/WEB-INF/jsp/Header.jspf" %>
+		<%@include file="/WEB-INF/jsp/Nav.jspf" %>
 	<div id="contenedora" style="float:none; margin: 0 auto;width: 900px;" >
+		
 		<div class="clearfix">
 			<div style="float: left; width: 50%">
 				<h1>Fabricantes</h1>
@@ -36,10 +25,6 @@
 				
 			</div>
 		</div>
-		<form action="/tienda_informatica/productos/" method="get"  style="display: inline;">
-    				<input type="submit" value="Cambiar a productos"/>
-				</form>
-				<hr>
 		<div>
 			<form method="GET" action="/tienda_informatica/fabricantes/">
 				<select name="ordenar_por"/>
@@ -97,6 +82,6 @@
 		No hay registros de fabricante
 	<% } %>
 	</div>
-</body>
+	<%@include file="/WEB-INF/jsp/Footer.jspf" %>
 </body>
 </html>

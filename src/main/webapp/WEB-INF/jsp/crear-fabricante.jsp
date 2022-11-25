@@ -2,23 +2,16 @@
     pageEncoding="UTF-8"%>
 <%@page import="org.iesvegademijas.model.Fabricante"%>
 <%@page import="java.util.Optional"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Detalle Fabricante</title>
-<style>
-.clearfix::after {
-	content: "";
-	display: block;
-	clear: both;
-}
 
+<%@include file="/WEB-INF/jsp/Head.jspf" %>
 </style>
 </head>
 <body>
 
-<div id="contenedora" style="float:none; margin: 0 auto;width: 900px;" >
+	<%@include file="/WEB-INF/jsp/Header.jspf" %>
+	<%@include file="/WEB-INF/jsp/Nav.jspf" %>
+<div id="contenedora" style="float:none; margin: 0 auto;width: 900px;">
+		
 	<form action="/tienda_informatica/fabricantes/crear/" method="post">
 		<div class="clearfix">
 			<div style="float: left; width: 50%">
@@ -47,6 +40,6 @@
 
 	</form>
 </div>
-
+<%@include file="/WEB-INF/jsp/Footer.jspf" %>
 </body>
 </html>

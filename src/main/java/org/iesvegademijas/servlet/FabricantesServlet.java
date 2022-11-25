@@ -16,6 +16,8 @@ import org.iesvegademijas.dao.FabricanteDAOImpl;
 import org.iesvegademijas.dto.FabricanteDTO;
 import org.iesvegademijas.model.Fabricante;
 import static java.util.stream.Collectors.*;
+
+
 public class FabricantesServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;

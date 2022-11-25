@@ -2,23 +2,14 @@
     pageEncoding="UTF-8"%>
 <%@page import="org.iesvegademijas.model.Producto"%>
 <%@page import="java.util.Optional"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Detalle Producto</title>
-<style>
-.clearfix::after {
-	content: "";
-	display: block;
-	clear: both;
-}
 
-</style>
-</head>
+<%@include file="/WEB-INF/jsp/Head.jspf" %>
 <body>
 
+	<%@include file="/WEB-INF/jsp/Header.jspf" %>
+	<%@include file="/WEB-INF/jsp/Nav.jspf" %>
 <div id="contenedora" style="float:none; margin: 0 auto;width: 900px;" >
+		
 		<div class="clearfix">
 			<div style="float: left; width: 50%">
 				<h1>Detalle Producto</h1>
@@ -83,6 +74,6 @@
 		<% 	} %>
 		
 </div>
-
+<%@include file="/WEB-INF/jsp/Footer.jspf" %>
 </body>
 </html>

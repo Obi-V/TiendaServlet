@@ -50,11 +50,23 @@ public class ProductosServlet extends HttpServlet {
 			
 			var lista = prodDAO.getAll();
 			String filtrar = (String)request.getParameter("filtrar-por-nombre");
+			
+			//Filtrar FullText Index
 			if (filtrar != null) {
+				lista = prodDAO.filtrarFullText(filtrar);
+			}
+			
+			/* Filtrar por nombre SQL
+			 * if (filtrar != null) {
+				lista = prodDAO.filtrarProductos(filtrar);
+			}*/
+			
+			/* Stream
+			 * if (filtrar != null) {
 				lista = lista.stream()
 						.filter(p-> p.getNombre().toLowerCase().contains(filtrar.toLowerCase()))
 						.collect(toList());
-			}
+			}*/
 			
 			request.setAttribute("listaProductos", lista);		
 			dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/productos.jsp");
@@ -75,7 +87,7 @@ public class ProductosServlet extends HttpServlet {
 					FabricanteDAOImpl fabDao = new FabricanteDAOImpl();
 					// GET
 					// /productos/create
-					request.setAttribute("listaFabricantes", fabDao.getAllDTOPlusCountProductos());
+					request.setAttribute("listaProductos", fabDao.getAllDTOPlusCountProductos());
 					dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/crear-producto.jsp");
 	        												
 				

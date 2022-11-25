@@ -18,4 +18,8 @@ public void update(Producto producto);
 
 public void delete(int id);
 
+public List<Producto> filtrarProductos(String filtroNombre);
+
+public List<Producto> filtrarFullText(String filtroNombre); 
+
 }

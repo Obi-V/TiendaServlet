@@ -3,24 +3,13 @@
 <%@page import="org.iesvegademijas.model.Producto"%>
 <%@page import="java.util.List"%>
 
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Productos</title>
-<style>
-.clearfix::after {
-	content: "";
-	display: block;
-	clear: both;
-}
+<%@include file="/WEB-INF/jsp/Head.jspf" %>
 
-</style>
-</head>
 <body>
-<body>
-
+		<%@include file="/WEB-INF/jsp/Header.jspf" %>
+		<%@include file="/WEB-INF/jsp/Nav.jspf" %>
 	<div id="contenedora" style="float:none; margin: 0 auto;width: 900px;">
+	
 		<div class="clearfix">
 			<div style="float: left; width: 50%">
 				<h1>Productos</h1>
@@ -36,16 +25,11 @@
 				
 			</div>
 		</div>
-		<form action="/tienda_informatica/fabricantes/" method="get"  style="display: inline;">
-    				<input type="submit" value="Cambiar a fabricantes" />
-				</form>
 		<div>
-			<hr>
 				<form action="/tienda_informatica/productos/" method="get"  style="display: inline;">
     				<input type="text" name="filtrar-por-nombre">
     				<input type="submit" value="buscar">
 				</form>
-			<hr>
 		</div>
 		<div class="clearfix">
 			<hr/>
@@ -94,6 +78,6 @@
 		No hay registros de producto
 	<% } %>
 	</div>
-</body>
+	<%@include file="/WEB-INF/jsp/Footer.jspf" %>
 </body>
 </html>
