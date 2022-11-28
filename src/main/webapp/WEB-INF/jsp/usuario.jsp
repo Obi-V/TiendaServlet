@@ -29,6 +29,7 @@
 		<div class="clearfix">
 			<div style="float: left;width: 20%">Id</div>
 			<div style="float: left;width: 20%">Nombre</div>
+			<div style="float: left;width: 20%">Rol</div>
 			<div style="float: left;width: 20%">Contraseña</div>
 			<div style="float: none;width: auto;overflow: hidden;">Acción</div>
 		</div>
@@ -44,6 +45,7 @@
 		<div style="margin-top: 6px;" class="clearfix">
 			<div style="float: left;width: 20%"><%= usuario.getId()%></div>
 			<div style="float: left;width: 20%"><%= usuario.getNombre()%></div>
+			<div style="float: left;width: 20%"><%= usuario.getRol()%></div>
 			<div style="float: left;width: 20%"><%= usuario.getContraseña()%></div>
 			<div style="float: none;width: auto;overflow: hidden;">
 				<form action="/tienda_informatica/usuario/<%= usuario.getId()%>" style="display: inline;">

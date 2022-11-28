@@ -2,6 +2,9 @@ package org.iesvegademijas.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.Comparator;
 import java.util.List;
 
@@ -11,6 +14,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.iesvegademijas.dao.UsuarioDAO;
 import org.iesvegademijas.dao.UsuarioDAOImpl;
@@ -63,6 +67,7 @@ public class UsuarioServlet extends HttpServlet {
 				// 		/usuario/edit/{id}/
 				// 		/usuario/create
 				// 		/usuario/create/
+				//		/usuario/login/
 				
 				pathInfo = pathInfo.replaceAll("/$", "");
 				String[] pathParts = pathInfo.split("/");
@@ -74,7 +79,17 @@ public class UsuarioServlet extends HttpServlet {
 					request.setAttribute("listaUsuario", usuDao.getAll());
 					dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/crear-usuario.jsp");
 	        												
-				
+				} else if (pathParts.length == 2 && "login".equals(pathParts[1])){
+					// GET
+					// /usuario/login
+					try {
+						dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/login.jsp");
+						        								
+					} catch (NumberFormatException nfe) {
+						nfe.printStackTrace();
+						dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/usuario.jsp");
+					}
+					
 				} else if (pathParts.length == 2){
 					UsuarioDAO usuDAO = new UsuarioDAOImpl();
 					// GET
@@ -100,11 +115,11 @@ public class UsuarioServlet extends HttpServlet {
 					} catch (NumberFormatException nfe) {
 						nfe.printStackTrace();
 						dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/usuario.jsp");
-					}	
+					}
 				} else {
 					System.out.println("Opción POST no soportada.");
 					dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/usuario.jsp");
-				}	
+				}
 			}
 			dispatcher.forward(request, response);		 
 }
@@ -141,7 +156,12 @@ public class UsuarioServlet extends HttpServlet {
 			doDelete(request, response);
 			
 			
-			
+		} else if (__method__ != null && "login".equalsIgnoreCase(__method__)) {
+			doLogin(request,response);
+		}
+		
+		else if (__method__ != null && "logout".equalsIgnoreCase(__method__)) {
+			doLogout(request, response);
 		} else {
 			
 			System.out.println("Opción POST no soportada.");
@@ -150,7 +170,6 @@ public class UsuarioServlet extends HttpServlet {
 		
 		response.sendRedirect("/tienda_informatica/usuario");
 		//response.sendRedirect("/tienda_informatica/usuario");
-		
 		
 	}
 	
@@ -196,4 +215,61 @@ public class UsuarioServlet extends HttpServlet {
 		
 	}
 	
+	protected void doLogin(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException{
+		
+		UsuarioDAO usuDAO = new UsuarioDAOImpl();
+		
+		String nombre = request.getParameter("nombre");
+		String contrasenia = request.getParameter("contrasenia");
+		
+		Usuario usuario = usuDAO.login(nombre);
+		
+		try {
+			if(usuario.getContraseña() == hashPassword(contrasenia)) {
+				 HttpSession session=request.getSession(true);
+				 session.setAttribute("usuario-logado", usuario);  
+			}
+		} catch (NoSuchAlgorithmException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+	}
+	
+	protected void doLogout(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException{
+		
+		
+		HttpSession session=request.getSession();
+		session.invalidate();
+		
+	}
+	
+	public static String hashPassword( String password ) throws NoSuchAlgorithmException {
+		MessageDigest digest;
+		
+		digest = MessageDigest.getInstance("SHA-256");
+		byte[] encodedhash = digest.digest(
+				password.getBytes(StandardCharsets.UTF_8));
+		
+		return bytesToHex(encodedhash);					
+		
+	}
+	
+	private static String bytesToHex(byte[] byteHash) {
+		
+	    StringBuilder hexString = new StringBuilder(2 * byteHash.length);	  	
+	    for (int i = 0; i < byteHash.length; i++) {
+	        String hex = Integer.toHexString(0xff & byteHash[i]);
+	        if(hex.length() == 1) {
+	            hexString.append('0');
+	        }
+	        hexString.append(hex);
+	    }
+	    
+	    return hexString.toString();
+	    
+	}
 }

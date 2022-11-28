@@ -15,6 +15,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
+import org.iesvegademijas.model.Producto;
 import org.iesvegademijas.model.Usuario;
 
 public class UsuarioDAOImpl extends AbstractDAOImpl implements UsuarioDAO{
@@ -107,7 +108,7 @@ public class UsuarioDAOImpl extends AbstractDAOImpl implements UsuarioDAO{
         
 	}
 
-	public static String hashPassword(String password ) throws NoSuchAlgorithmException {
+	public static String hashPassword( String password ) throws NoSuchAlgorithmException {
 		MessageDigest digest;
 		
 		digest = MessageDigest.getInstance("SHA-256");
@@ -238,6 +239,39 @@ public class UsuarioDAOImpl extends AbstractDAOImpl implements UsuarioDAO{
 		} finally {
             closeDb(conn, ps, rs);
         }
+	
+	}
+	
+	public Usuario login(String usuario) {
 		
+		Usuario usu = new Usuario();
+		Connection conn = null;
+		PreparedStatement ps = null;
+        ResultSet rs = null;
+        
+        try {
+        	conn = connectDB();
+        	
+        	ps = conn.prepareStatement("SELECT * FROM producto WHERE nombre like ? ;");
+        	String filtro = "%"+usuario+"%";
+        	ps.setString(1, filtro);
+        	rs = ps.executeQuery();
+        	
+        	while (rs.next()) {
+        		
+        		usu.setId(rs.getInt("id"));
+        		usu.setNombre(rs.getString("nombre"));
+        		usu.setContraseña(rs.getString("contrasenia"));
+        		usu.setRol(rs.getString("rol"));        		
+        	}
+        
+        }catch (SQLException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} finally {
+            closeDb(conn, ps, rs);
+        }
+        return usu;
 	}
 }
