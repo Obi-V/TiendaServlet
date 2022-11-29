@@ -13,15 +13,17 @@
 
 	
 	<form action="/tienda_informatica/usuario/login/" method="post">
+	<input type="hidden" name="__method__" value="login">
 		<div class="clearfix">
 			<div style="float: left; width: 50%">
 				<h1>Loguear Usuario</h1>
 			</div>
 			<div style="float: none;width: auto;overflow: hidden;min-height: 80px;position: relative;">
-				
-				<div style="position: absolute; left: 39%; top : 39%;">								
-					<input type="submit" value="Loguear"/>					
-				</div>
+				<div style="width; 29.5%;display: inline-block;"></div>
+		<div style="margin-top: 20px"; display="inline-block"; class="clearfix">
+			<input type="submit" value="iniciar sesion">
+			
+		</div>
 			</div>
 		</div>
 		<div class="clearfix">

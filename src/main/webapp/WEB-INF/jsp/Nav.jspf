@@ -3,6 +3,14 @@
 		<a href="/tienda_informatica/fabricantes/">Fabricantes</a>
 		<a href="/tienda_informatica/productos/">Producto</a>
 		<div class="menu-log">
-			<a href="/tienda_informatica/usuario/login">LOGIN</a>
+		
+		<% if(request.getSession().getAttribute("usuario-logado")!= null){ %>
+			<form action="/tienda_informatica/usuario/logout/" method="post">
+				<input type="hidden" name="__method__" value="logout">
+				<input type="submit" value="Cerrar sesion">
+			</form>
+				<%} else{ %>
+				<a href="/tienda_informatica/usuario/login">LOGIN</a>
+				<%} %>
 		</div>
 	</nav>

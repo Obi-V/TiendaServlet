@@ -142,7 +142,7 @@ public class UsuarioServlet extends HttpServlet {
 			nuevoUsu.setNombre(nombre);
 			nuevoUsu.setContraseña(contrasenia);
 			nuevoUsu.setRol(rol);
-			usuDAO.create(nuevoUsu);		
+			usuDAO.create(nuevoUsu);	
 			
 		} else if (__method__ != null && "put".equalsIgnoreCase(__method__)){			
 			// Actualizar uno existente
@@ -168,8 +168,12 @@ public class UsuarioServlet extends HttpServlet {
 			
 		}
 		
-		response.sendRedirect("/tienda_informatica/usuario");
+		if((__method__ != null && "login".equalsIgnoreCase(__method__)) || (__method__ != null && "logout".equalsIgnoreCase(__method__))){
+			response.sendRedirect("/tienda_informatica/");
+		}else {
+			response.sendRedirect("/tienda_informatica/usuario");
 		//response.sendRedirect("/tienda_informatica/usuario");
+		}
 		
 	}
 	
@@ -225,22 +229,21 @@ public class UsuarioServlet extends HttpServlet {
 		
 		Usuario usuario = usuDAO.login(nombre);
 		
-		try {
-			if(usuario.getContraseña() == hashPassword(contrasenia)) {
-				 HttpSession session=request.getSession(true);
-				 session.setAttribute("usuario-logado", usuario);  
+		if(usuario.getId() !=0) {
+			try {
+				if(usuario.getContraseña().equals(hashPassword(contrasenia))) {
+					 HttpSession session = request.getSession(true);
+					 session.setAttribute("usuario-logado", usuario);
+				}
+			} catch (NoSuchAlgorithmException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
-		} catch (NoSuchAlgorithmException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
-		
-		
 	}
 	
 	protected void doLogout(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException{
-		
 		
 		HttpSession session=request.getSession();
 		session.invalidate();

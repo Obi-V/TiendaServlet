@@ -252,17 +252,17 @@ public class UsuarioDAOImpl extends AbstractDAOImpl implements UsuarioDAO{
         try {
         	conn = connectDB();
         	
-        	ps = conn.prepareStatement("SELECT * FROM producto WHERE nombre like ? ;");
+        	ps = conn.prepareStatement("SELECT * FROM usuario WHERE nombre like ?;");
         	String filtro = "%"+usuario+"%";
         	ps.setString(1, filtro);
         	rs = ps.executeQuery();
         	
-        	while (rs.next()) {
+        	if (rs.next()) {
         		
         		usu.setId(rs.getInt("id"));
         		usu.setNombre(rs.getString("nombre"));
         		usu.setContraseña(rs.getString("contrasenia"));
-        		usu.setRol(rs.getString("rol"));        		
+        		usu.setRol(rs.getString("rol"));       		
         	}
         
         }catch (SQLException e) {
