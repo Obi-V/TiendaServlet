@@ -51,12 +51,13 @@
 				Rol
 			</div>
 			<div style="float: none;width: auto;overflow: hidden;">
-				<form method="GET" action="/tienda_informatica/usuario/">
-				<select name="rol"/>
+
+				<select name="rol">
 					<option value="administrador"> Administrador</option>
 					<option value="cliente"> Cliente</option>
 					<option value="vendedor"> Vendedor</option>
 				</select>
+				
 			</div> 
 		</div>
 	</form>

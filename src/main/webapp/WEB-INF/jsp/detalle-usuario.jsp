@@ -22,7 +22,6 @@
 							<input type="submit" value="Volver" />
 						</form>
 					</div>
-				
 			</div>
 		</div>
 		
@@ -50,7 +49,22 @@
 				<input value="<%= optUsu.get().getNombre() %>" readonly="readonly"/>
 			</div> 
 		</div>
-		
+		<div style="margin-top: 6px;" class="clearfix">
+			<div style="float: left;width: 50%">
+				<label>Rol</label>
+			</div>
+			<div style="float: none;width: auto;overflow: hidden;">
+				<input value="<%= optUsu.get().getRol() %>" readonly="readonly"/>
+			</div>
+		</div>
+		<div style="margin-top: 6px;" class="clearfix">
+			<div style="float: left;width: 50%">
+				<label>Contraseña</label>
+			</div>
+			<div style="float: none;width: auto;overflow: hidden;">
+				<input value="<%= optUsu.get().getContraseña() %>" readonly="readonly"/>
+			</div>
+		</div>
 		<% 	} else { %>
 			
 				request.sendRedirect("usuario/");

@@ -202,7 +202,6 @@ public class FabricantesServlet extends HttpServlet {
 		} catch (NumberFormatException nfe) {
 			nfe.printStackTrace();
 		}
-		
 	}
 	
 	@Override
@@ -222,7 +221,5 @@ public class FabricantesServlet extends HttpServlet {
 		} catch (NumberFormatException nfe) {
 			nfe.printStackTrace();
 		}
-		
 	}
-	
 }

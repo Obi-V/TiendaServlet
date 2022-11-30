@@ -244,7 +244,7 @@ public class ProductoDAOImpl extends AbstractDAOImpl implements ProductoDAO{
    					
 	}
 
-	public List<Producto> filtrarFullText(String filtroNombre) {
+	public List<Producto> filtrarFullText(String filtroNombre){
 	List<Producto> listOrd = new ArrayList<>(); 
 			
 			Connection conn = null;
@@ -254,7 +254,7 @@ public class ProductoDAOImpl extends AbstractDAOImpl implements ProductoDAO{
 	        try {
 	        	conn = connectDB();
 	        	
-	        	ps = conn.prepareStatement("Select * from producto where MATCH (nombre) against (?)");
+	        	ps = conn.prepareStatement("Select * from producto where MATCH(nombre) against(?)");
 	        	ps.setString(1, filtroNombre);
 	        	rs = ps.executeQuery();
 	        	

@@ -185,6 +185,9 @@ public class UsuarioServlet extends HttpServlet {
 		UsuarioDAO usuDAO = new UsuarioDAOImpl();
 		String id = request.getParameter("id");
 		String nombre = request.getParameter("nombre");
+		String rol = request.getParameter("rol");
+		String contrasenia = request.getParameter("contrasenia");
+		
 		Usuario usu = new Usuario();
 		
 		try {
@@ -192,6 +195,8 @@ public class UsuarioServlet extends HttpServlet {
 			int idUsu = Integer.parseInt(id);
 			usu.setId(idUsu);
 			usu.setNombre(nombre);
+			usu.setRol(rol);
+			usu.setContraseña(contrasenia);
 			usuDAO.update(usu);
 			
 		} catch (NumberFormatException nfe) {

@@ -3,7 +3,7 @@ package org.iesvegademijas.dao;
 import java.util.List;
 import java.util.Optional;
 
-import org.iesvegademijas.model.Fabricante;
+
 import org.iesvegademijas.model.Producto;
 
 public interface ProductoDAO {

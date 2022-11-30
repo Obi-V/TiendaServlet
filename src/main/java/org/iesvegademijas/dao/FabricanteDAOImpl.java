@@ -271,7 +271,7 @@ public class FabricanteDAOImpl extends AbstractDAOImpl implements FabricanteDAO{
 	return listFab;
 	}
 	
-	public List<FabricanteDTO> getAllDTOPlusCountProductos(String ordenarPor, String orden) {
+	public List<FabricanteDTO>  getAllDTOPlusCountProductos(String ordenarPor, String orden) {
 		
 		List<FabricanteDTO> listOrd = new ArrayList<>(); 
 		
@@ -289,10 +289,10 @@ public class FabricanteDAOImpl extends AbstractDAOImpl implements FabricanteDAO{
         	lista_ordenarPor.add("nombre");
         	lista_ordenarPor.add("codigo");
         	List <String> lista_orden = new ArrayList<>();
-        	lista_ordenarPor.add("asc");
-        	lista_ordenarPor.add("desc");
+        	lista_orden.add("asc");
+        	lista_orden.add("desc");
         	
-        	if(lista_ordenarPor.contains(ordenarPor)&& lista_orden.contains(orden)) {
+        	if(lista_ordenarPor.contains(ordenarPor) && lista_orden.contains(orden)) {
         		
         		rs = s.executeQuery(consulta + " order by "+ ordenarPor + " " + orden+ ";" );
         	

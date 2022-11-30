@@ -47,5 +47,4 @@ public class FabricanteDTO {
 	public void setNumeroProductos(Optional<Integer> optional) {
 		this.numeroProductos = optional;
 	}
-	
 }

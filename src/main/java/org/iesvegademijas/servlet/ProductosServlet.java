@@ -49,11 +49,14 @@ public class ProductosServlet extends HttpServlet {
 			//	/productos
 			
 			var lista = prodDAO.getAll();
-			String filtrar = (String)request.getParameter("filtrar-por-nombre");
+			
+			String filtrar = request.getParameter("filtrar-por-nombre");
 			
 			//Filtrar FullText Index
 			if (filtrar != null) {
-				lista = prodDAO.filtrarFullText(filtrar);
+				if(filtrar.hashCode() != 0){
+					lista = prodDAO.filtrarFullText(filtrar);
+				}	
 			}
 			
 			/* Filtrar por nombre SQL

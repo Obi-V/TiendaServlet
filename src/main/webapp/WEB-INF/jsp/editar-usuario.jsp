@@ -49,6 +49,27 @@
 				<input name="nombre" value="<%= optUsu.get().getNombre() %>"/>
 			</div> 
 		</div>
+		<div style="margin-top: 6px;" class="clearfix">
+			<div style="float: left;width: 50%">
+				<label>Contraseña</label>
+			</div>
+			<div style="float: none;width: auto;overflow: hidden;">
+				<input name="contrasenia" value="<%= optUsu.get().getContraseña() %>"/>
+			</div>
+		</div>
+		<div style="margin-top: 6px;" class="clearfix">
+			<div style="float: left;width: 50%">
+				<label>Rol</label>
+			</div>
+			<div style="float: none;width: auto;overflow: hidden;">
+				<select name="rol">
+					<option value="administrador"> Administrador</option>
+					<option value="cliente"> Cliente</option>
+					<option value="vendedor"> Vendedor</option>
+				</select>
+				
+			</div>
+		</div>
 		
 		<% 	} else { %>
 			
