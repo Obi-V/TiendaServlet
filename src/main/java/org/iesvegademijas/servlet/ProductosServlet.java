@@ -53,10 +53,8 @@ public class ProductosServlet extends HttpServlet {
 			String filtrar = request.getParameter("filtrar-por-nombre");
 			
 			//Filtrar FullText Index
-			if (filtrar != null) {
-				if(filtrar.hashCode() != 0){
+			if (filtrar != null && filtrar.hashCode() != 0) {
 					lista = prodDAO.filtrarFullText(filtrar);
-				}	
 			}
 			
 			/* Filtrar por nombre SQL
@@ -90,7 +88,7 @@ public class ProductosServlet extends HttpServlet {
 					FabricanteDAOImpl fabDao = new FabricanteDAOImpl();
 					// GET
 					// /productos/create
-					request.setAttribute("listaProductos", fabDao.getAllDTOPlusCountProductos());
+					request.setAttribute("listaFabricantes", fabDao.getAllDTOPlusCountProductos());
 					dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/crear-producto.jsp");
 	        												
 				
@@ -109,11 +107,13 @@ public class ProductosServlet extends HttpServlet {
 					
 				} else if (pathParts.length == 3 && "editar".equals(pathParts[1]) ) {
 					ProductoDAO prodDAO = new ProductoDAOImpl();
+					FabricanteDAOImpl fabDAO = new FabricanteDAOImpl();
 					
 					// GET
 					// /productos/edit/{id}
 					try {
 						request.setAttribute("producto",prodDAO.find(Integer.parseInt(pathParts[2])));
+						request.setAttribute("listaFabricantes", fabDAO.getAllDTOPlusCountProductos());
 						dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/editar-producto.jsp");
 						        								
 					} catch (NumberFormatException nfe) {

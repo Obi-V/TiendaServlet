@@ -61,7 +61,7 @@
 		
 		<div style="margin-top: 6px;" class="clearfix">
 			<div style="float: left;width: 50%">
-				Código Fabricante
+				Fabricante
 			</div>
 			<div style="float: none;width: auto;overflow: hidden;">
 				<select name="codigo_fabricante" />

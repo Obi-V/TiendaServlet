@@ -1,7 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@page import="org.iesvegademijas.model.Producto"%>
+<%@page import="org.iesvegademijas.dto.FabricanteDTO"%>
 <%@page import="java.util.Optional"%>
+<%@page import="java.util.List"%>
+
 
 <%@include file="/WEB-INF/jsp/Head.jspf" %>
 <body>
@@ -61,7 +64,12 @@
 				<label>Codigo Fabricante</label>
 			</div>
 			<div style="float: none;width: auto;overflow: hidden;">
-				<input name="codigo_fabricante" value="<%= optProd.get().getCodigoFabricante() %>"/>
+				<select name="codigo_fabricante" />
+				<%	if (request.getAttribute("listaFabricantes") != null) {
+		            	List<FabricanteDTO> listaFabricante = (List<FabricanteDTO>)request.getAttribute("listaFabricantes");
+		            	for (FabricanteDTO fabricante : listaFabricante) {%>
+		            		<option value="<%= fabricante.getCodigo()%>"><%= fabricante.getNombre()%></option>
+		            <% } }%>
 			</div> 
 		</div>
 		

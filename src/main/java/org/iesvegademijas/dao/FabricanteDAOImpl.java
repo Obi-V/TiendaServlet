@@ -185,8 +185,7 @@ public class FabricanteDAOImpl extends AbstractDAOImpl implements FabricanteDAO{
         	conn = connectDB();
         	
         	ps = conn.prepareStatement("DELETE FROM fabricante WHERE codigo = ?");
-        	int idx = 1;        	
-        	ps.setInt(idx, id);
+        	ps.setInt(1, id);
         	
         	int rows = ps.executeUpdate();
         	
@@ -214,7 +213,7 @@ public class FabricanteDAOImpl extends AbstractDAOImpl implements FabricanteDAO{
         	conn = connectDB();
         	
         	ps = conn.prepareStatement("SELECT COUNT(P.codigo) as numProd from fabricante F left outer join producto P on F.codigo = P.codigo_fabricante where F.codigo = ? group by F.codigo ");
-        	int idx = 1;        	
+        	int idx = 1;
         	ps.setInt(idx, id);
         	
         	rs = ps.executeQuery();
@@ -273,7 +272,7 @@ public class FabricanteDAOImpl extends AbstractDAOImpl implements FabricanteDAO{
 	
 	public List<FabricanteDTO>  getAllDTOPlusCountProductos(String ordenarPor, String orden) {
 		
-		List<FabricanteDTO> listOrd = new ArrayList<>(); 
+		List<FabricanteDTO> listOrd = new ArrayList<>();
 		
 		Connection conn = null;
 		Statement s = null;
@@ -300,7 +299,7 @@ public class FabricanteDAOImpl extends AbstractDAOImpl implements FabricanteDAO{
         		rs = s.executeQuery(consulta + ";");
         	}
         	
-        	while (rs.next()) {
+        	while (rs.next()){
         		FabricanteDTO fab = new FabricanteDTO();
         		fab.setNombre(rs.getString("nombre"));
         		fab.setCodigo(rs.getInt("codigo"));

@@ -208,7 +208,7 @@ public class FabricantesServlet extends HttpServlet {
 	protected void doDelete(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
-		RequestDispatcher dispatcher;
+	
 		FabricanteDAO fabDAO = new FabricanteDAOImpl();
 		String codigo = request.getParameter("codigo");
 		
