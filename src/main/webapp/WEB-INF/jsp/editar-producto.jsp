@@ -57,7 +57,7 @@
 			</div>
 			<div style="float: none;width: auto;overflow: hidden;">
 				<input name="precio" value="<%= optProd.get().getPrecio() %>"/>
-			</div> 
+			</div>
 		</div>
 		<div style="margin-top: 6px;" class="clearfix">
 			<div style="float: left;width: 50%">

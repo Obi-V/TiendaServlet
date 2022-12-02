@@ -243,7 +243,15 @@ public class ProductoDAOImpl extends AbstractDAOImpl implements ProductoDAO{
 	return listOrd;
    					
 	}
-
+	
+	
+	/**
+	 * Hay que crear un índice en la base de datos:
+	 * 
+	 * 			CREATE FULLTEXT INDEX index_name
+	 *			ON table_name(idx_column_name);
+	 * 
+	 */
 	public List<Producto> filtrarFullText(String filtroNombre){
 	List<Producto> listOrd = new ArrayList<>(); 
 			

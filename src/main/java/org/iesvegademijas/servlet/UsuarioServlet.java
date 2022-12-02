@@ -33,7 +33,7 @@ public class UsuarioServlet extends HttpServlet {
 	
 	/**
 	 * HTTP Method: GET
-	 * Paths: 
+	 * Paths:
 	 * 		/usuario/
 	 * 		/usuario/{id}
 	 * 		/usuario/edit/{id}

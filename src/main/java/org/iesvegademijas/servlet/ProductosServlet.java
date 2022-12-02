@@ -44,7 +44,7 @@ public class ProductosServlet extends HttpServlet {
 		if (pathInfo == null || "/".equals(pathInfo)) {
 			ProductoDAO prodDAO = new ProductoDAOImpl();
 			
-			//GET 
+			//GET
 			//	/productos/
 			//	/productos
 			

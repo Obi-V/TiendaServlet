@@ -25,7 +25,4 @@ public class Fabricante {
 	public String toString() {
 		return "Fabricante [codigo=" + codigo + ", nombre=" + nombre + "]";
 	}
-	
-	
-	
 }

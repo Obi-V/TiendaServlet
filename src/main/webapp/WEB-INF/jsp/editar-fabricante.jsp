@@ -6,11 +6,11 @@
 <%@include file="/WEB-INF/jsp/Head.jspf" %>
 <body>
 
-	<%@include file="/WEB-INF/jsp/Header.jspf" %>
-	<%@include file="/WEB-INF/jsp/Nav.jspf" %>
+<%@include file="/WEB-INF/jsp/Header.jspf" %>
+<%@include file="/WEB-INF/jsp/Nav.jspf" %>
 <div id="contenedora" style="float:none; margin: 0 auto;width: 900px;" >
 		
-	<form action="/tienda_informatica/fabricantes/editar/" method="post" >
+	<form action="/tienda_informatica/fabricantes/editar/" method="post">
 		<input type="hidden" name="__method__" value="put" />
 		<div class="clearfix">
 			<div style="float: left; width: 50%">
@@ -19,18 +19,16 @@
 			<div style="float: none;width: auto;overflow: hidden;min-height: 80px;position: relative;">
 				
 				<div style="position: absolute; left: 39%; top : 39%;">
-							<input type="submit" value="Guardar" />						
+					<input type="submit" value="Guardar" />						
 				</div>
-				
 			</div>
 		</div>
 		
-		<div class="clearfix">
-			<hr/>
-		</div>
+		<hr/>
+		
 		
 		<% 	Optional<Fabricante> optFab = (Optional<Fabricante>)request.getAttribute("fabricante");
-			if (optFab.isPresent()) {
+			if (optFab.isPresent()){
 		%>
 		
 		<div style="margin-top: 6px;" class="clearfix">
@@ -39,7 +37,7 @@
 			</div>
 			<div style="float: none;width: auto;overflow: hidden;">
 				<input name="codigo" value="<%= optFab.get().getCodigo() %>" readonly="readonly"/>
-			</div> 
+			</div>
 		</div>
 		<div style="margin-top: 6px;" class="clearfix">
 			<div style="float: left;width: 50%">
@@ -47,11 +45,11 @@
 			</div>
 			<div style="float: none;width: auto;overflow: hidden;">
 				<input name="nombre" value="<%= optFab.get().getNombre() %>"/>
-			</div> 
+			</div>
 		</div>
 		
-		<% 	} else { %>
-			
+		<% } else { %>
+		
 				request.sendRedirect("fabricantes/");
 		
 		<% 	} %>

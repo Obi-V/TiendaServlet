@@ -43,13 +43,14 @@ public class FabricanteDAOImpl extends AbstractDAOImpl implements FabricanteDAO{
             ps.setString(idx++, fabricante.getNombre());
                    
             int rows = ps.executeUpdate();
-            if (rows == 0) 
+            if (rows == 0) {
             	System.out.println("INSERT de fabricante con 0 filas insertadas.");
+            }
             
             rsGenKeys = ps.getGeneratedKeys();
-            if (rsGenKeys.next()) 
+            if (rsGenKeys.next()) {
             	fabricante.setCodigo(rsGenKeys.getInt(1));
-                      
+            }     
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
@@ -81,9 +82,9 @@ public class FabricanteDAOImpl extends AbstractDAOImpl implements FabricanteDAO{
         	rs = s.executeQuery("SELECT * FROM fabricante");          
             while (rs.next()) {
             	Fabricante fab = new Fabricante();
-            	int idx = 1;
-            	fab.setCodigo(rs.getInt(idx++));
-            	fab.setNombre(rs.getString(idx));
+            	
+            	fab.setCodigo(rs.getInt("codigo"));
+            	fab.setNombre(rs.getString("nombre"));
             	listFab.add(fab);
             }
           
@@ -113,16 +114,15 @@ public class FabricanteDAOImpl extends AbstractDAOImpl implements FabricanteDAO{
         	
         	ps = conn.prepareStatement("SELECT * FROM fabricante WHERE codigo = ?");
         	
-        	int idx =  1;
-        	ps.setInt(idx, id);
+        	ps.setInt(1, id);
         	
         	rs = ps.executeQuery();
         	
         	if (rs.next()) {
         		Fabricante fab = new Fabricante();
-        		idx = 1;
-        		fab.setCodigo(rs.getInt(idx++));
-        		fab.setNombre(rs.getString(idx));
+        		
+        		fab.setCodigo(rs.getInt("codigo"));
+        		fab.setNombre(rs.getString("nombre"));
         		
         		return Optional.of(fab);
         	}
@@ -278,24 +278,25 @@ public class FabricanteDAOImpl extends AbstractDAOImpl implements FabricanteDAO{
 		Statement s = null;
         ResultSet rs = null;
         
+        List <String> lista_ordenarPor = new ArrayList<>();
+    	lista_ordenarPor.add("nombre");
+    	lista_ordenarPor.add("codigo");
+    	List <String> lista_orden = new ArrayList<>();
+    	lista_orden.add("asc");
+    	lista_orden.add("desc");
+        
         try {
         	conn = connectDB();
         	
         	s = conn.createStatement();
         	
         	String consulta = "SELECT F.*, COUNT(P.codigo) as numProd from fabricante F left outer join producto P on F.codigo = P.codigo_fabricante group by F.codigo";
-        	List <String> lista_ordenarPor = new ArrayList<>();
-        	lista_ordenarPor.add("nombre");
-        	lista_ordenarPor.add("codigo");
-        	List <String> lista_orden = new ArrayList<>();
-        	lista_orden.add("asc");
-        	lista_orden.add("desc");
         	
-        	if(lista_ordenarPor.contains(ordenarPor) && lista_orden.contains(orden)) {
+        	if(lista_ordenarPor.contains(ordenarPor) && lista_orden.contains(orden)){
         		
         		rs = s.executeQuery(consulta + " order by "+ ordenarPor + " " + orden+ ";" );
         	
-        	}else {
+        	} else {
         		rs = s.executeQuery(consulta + ";");
         	}
         	
@@ -306,7 +307,7 @@ public class FabricanteDAOImpl extends AbstractDAOImpl implements FabricanteDAO{
         		fab.setNumeroProductos(Optional.of(rs.getInt("numProd")));
         		listOrd.add(fab);
         	}
-
+        	
         } catch (SQLException e) {
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
